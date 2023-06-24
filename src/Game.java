@@ -9,6 +9,9 @@ public class Game {
     public final int DEALER_NUM = 17;
     public Game(){
 
+    }
+
+    public void init(){
         dealer = new Dealer();
         player = new Player();
         deck = new Deck();
@@ -16,11 +19,14 @@ public class Game {
         dealer.cards.add(deck.pop());
         player.cards.add(deck.pop());
         player.cards.add(deck.pop());
+        player.sum = player.calculateSum();
+        dealer.sum = dealer.calculateSum();
         //딜러의 카드 하나 가려서 보여주기
         // check이 false이면 s입력이므로 반복문 탈출
         while (check){
             check = turn();
             player.sum = player.calculateSum();
+            dealer.sum = dealer.calculateSum();
             if(player.sum > BUSTED_NUM){
                 printBoard();
                 System.out.println("Dealer Wins...");
@@ -63,9 +69,7 @@ public class Game {
                 }
             }
         }
-
     }
-
     public boolean isH(String input) {
         return input.equalsIgnoreCase("H");
     }
@@ -95,6 +99,7 @@ public class Game {
         }
         System.out.println();
         System.out.println("-----------------------------------------------");
+        print_score();
     }
     public boolean isCheck(String input, boolean check){
         if(isH(input)){player.cards.add(deck.pop());
@@ -105,6 +110,12 @@ public class Game {
         }
 
         return check;
+    }
+
+    public void print_score(){
+        System.out.println("점수확인용");
+        System.out.println("player : " + player.sum);
+        System.out.println("dealer : " + dealer.sum);
     }
 
 }
