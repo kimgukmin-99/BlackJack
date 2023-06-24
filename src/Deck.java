@@ -42,6 +42,7 @@ public class Deck {
     }
 
     public String pop(){
+
         return cards.pop();
     }
 }
