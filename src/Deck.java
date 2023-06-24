@@ -31,7 +31,7 @@ public class Deck {
     }
 
     public void showCards() {
-        System.out.println("Deck Cards: ");
+        System.out.println("Deck Cards ");
         for (String card : cards) {
             System.out.println(card);
         }
@@ -39,5 +39,9 @@ public class Deck {
 
     public void size(){
         System.out.println(cards.size());
+    }
+
+    public String pop(){
+        return cards.pop();
     }
 }
