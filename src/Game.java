@@ -110,16 +110,7 @@ public class Game {
 
         return check;
     }
-    public boolean isCheck2(String input, boolean check){
-        if(isH(input)){dealer.cards.add(deck.pop());
-        }
-        else if(isS(input)){check = false;
-        }
-        else{System.out.println("잘못입력하셨습니다. ");
-        }
 
-        return check;
-    }
     public void print_score(){
         System.out.println("점수확인용");
         System.out.println("player : " + player.sum);
