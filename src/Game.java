@@ -97,12 +97,12 @@ public class Game {
         System.out.print("-------------");
         System.out.println();
         System.out.print("# Dealer: ");
-        for(String card : dealer.cards2.keySet()){
+        for(String card : dealer.cards.keySet()){
             System.out.print(card + "  ");
         }
         System.out.println();
         System.out.print("# Player: ");
-        for(String card : player.cards2.keySet()){
+        for(String card : player.cards.keySet()){
             System.out.print(card + "  ");
         }
         System.out.println();

@@ -3,20 +3,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Dealer {
-    public int sum;
-    ArrayList<String> cards; // 가지고 있는 카드 리스트
+    int sum;
     String secretCard;
-    Map<String, Integer> cards2;
+    Map<String, Integer> cards;
     public Dealer() {
-        cards = new ArrayList<>();
-        cards2 = new HashMap<>();
+        cards = new HashMap<>();
     } /////리스트에 저장말고 맵에 키 밸류로 저장하기
 
 
     // 가지고 있는 카드들의 전체 합을 계산하는 메소드
     public int calculateSum() {
         int cal_sum = 0;
-        for (Integer value : cards2.values()) {
+        for (Integer value : cards.values()) {
             cal_sum += value;
         }
         return cal_sum;
@@ -36,7 +34,7 @@ public class Dealer {
 
     public void put(Deck deck){
         String card = deck.pop();
-        this.cards2.put(card, getValue(card));
+        this.cards.put(card, getValue(card));
     }
 
 

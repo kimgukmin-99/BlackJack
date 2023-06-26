@@ -4,17 +4,17 @@ import java.util.Map;
 
 public class Player {
     public int sum;
-    ArrayList<String> cards;
-    Map<String, Integer> cards2;
+
+    Map<String, Integer> cards;
     public Player(){
 
-        cards = new ArrayList<>();
-        cards2 = new HashMap<>();
+
+        cards = new HashMap<>();
     }
 
     public int calculateSum() {
         int cal_sum = 0;
-        for (Integer value : cards2.values()) {
+        for (Integer value : cards.values()) {
             cal_sum += value;
         }
         return cal_sum;
@@ -33,7 +33,7 @@ public class Player {
     }
     public void put(Deck deck){
         String card = deck.pop();
-        this.cards2.put(card, getValue(card));
+        this.cards.put(card, getValue(card));
     }
 
 
