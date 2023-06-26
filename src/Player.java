@@ -1,18 +1,20 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Player {
     public int sum;
     ArrayList<String> cards;
-
+    Map<String, Integer> cards2;
     public Player(){
 
         cards = new ArrayList<>();
+        cards2 = new HashMap<>();
     }
 
     public int calculateSum() {
         int cal_sum = 0;
-        for (String card : cards) {
-            int value = getValue(card);
+        for (Integer value : cards2.values()) {
             cal_sum += value;
         }
         return cal_sum;
@@ -28,6 +30,10 @@ public class Player {
         } else {
             return Integer.parseInt(rank); // 숫자 카드는 해당 숫자로 계산
         }
+    }
+    public void put(Deck deck){
+        String card = deck.pop();
+        this.cards2.put(card, getValue(card));
     }
 
 

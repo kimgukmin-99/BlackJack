@@ -15,32 +15,40 @@ public class Game {
         dealer = new Dealer();
         player = new Player();
         deck = new Deck();
-        dealer.cards.add(deck.pop());
-        dealer.cards.add("XX");
-        dealer.secretCard = deck.pop();
-        player.cards.add(deck.pop());
-        player.cards.add(deck.pop());
+
+        dealer.put(deck);
+        dealer.put(deck);
+        player.put(deck);
+        player.put(deck);
         player.sum = player.calculateSum();
 
         while (check){
             check = turn();
             player.sum = player.calculateSum();
-            if(player.sum > BUSTED_NUM){
+            if(player.sum > BUSTED_NUM){//플레이가 버스트될 경우
                 printBoard();
                 System.out.println("Dealer Wins...");
-                dealer.cards.set(1,dealer.secretCard);
+                //시크릿카드 보여주는 코드
                 printBoard();
                 break;
 
-            }//플레이가 버스트될 경우
+            }
+
             //플레이어 스탠 할때
             if(!check){
-                dealer.cards.set(1,dealer.secretCard);
+                //시크릿카드 보여주는 코드
                 dealer.sum = dealer.calculateSum();
+                printBoard();
                 if(dealer.sum < DEALER_NUM){
                     while(dealer.sum < DEALER_NUM){
-                        dealer.cards.add(deck.pop());
-                        dealer.sum = dealer.calculateSum();
+                        try {
+                            Thread.sleep(1000);
+                            dealer.put(deck);
+                            dealer.sum = dealer.calculateSum();
+                            printBoard();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                     if(dealer.sum > BUSTED_NUM){
                         System.out.println("Player Win...");
@@ -89,19 +97,20 @@ public class Game {
         System.out.print("-------------");
         System.out.println();
         System.out.print("# Dealer: ");
-        for(String card : dealer.cards){
+        for(String card : dealer.cards2.keySet()){
             System.out.print(card + "  ");
         }
         System.out.println();
         System.out.print("# Player: ");
-        for(String card : player.cards){
+        for(String card : player.cards2.keySet()){
             System.out.print(card + "  ");
         }
         System.out.println();
         System.out.println("-----------------------------------------------");
+        print_score();
     }
     public boolean isCheck(String input, boolean check){
-        if(isH(input)){player.cards.add(deck.pop());
+        if(isH(input)){player.put(deck);
         }
         else if(isS(input)){check = false;
         }
@@ -116,5 +125,6 @@ public class Game {
         System.out.println("player : " + player.sum);
         System.out.println("dealer : " + dealer.sum);
     }
+
 
 }

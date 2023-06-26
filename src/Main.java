@@ -23,14 +23,3 @@ public class Main {
         }
     }
 }
-/*
-System.out.println("다시 하시겠습니까? (Y / N) : ");
-        String inputRe = scanner.next();
-        if(isY(inputRe)){
-        }
-        else if(isN(inputRe)){
-        break;
-        }
-        else{
-
-        }*/
