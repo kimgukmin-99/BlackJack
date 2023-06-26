@@ -3,9 +3,12 @@ import java.util.ArrayList;
 public class Dealer {
     public int sum;
     ArrayList<String> cards; // 가지고 있는 카드 리스트
+    String secretCard;
 
     public Dealer() {
+
         cards = new ArrayList<>();
+
     }
 
     // 가지고 있는 카드들의 전체 합을 계산하는 메소드
