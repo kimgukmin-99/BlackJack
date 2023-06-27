@@ -1,3 +1,5 @@
+import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
 public class Game {
     Dealer dealer;
@@ -16,7 +18,7 @@ public class Game {
         player = new Player();
         deck = new Deck();
 
-        dealer.put(deck);
+        dealer.secretPut(deck);
         dealer.put(deck);
         player.put(deck);
         player.put(deck);
@@ -28,7 +30,7 @@ public class Game {
             if(player.sum > BUSTED_NUM){//플레이가 버스트될 경우
                 printBoard();
                 System.out.println("Dealer Wins...");
-                //시크릿카드 보여주는 코드
+                showSecret();
                 printBoard();
                 break;
 
@@ -36,7 +38,7 @@ public class Game {
 
             //플레이어 스탠 할때
             if(!check){
-                //시크릿카드 보여주는 코드
+                showSecret();
                 dealer.sum = dealer.calculateSum();
                 printBoard();
                 if(dealer.sum < DEALER_NUM){
@@ -107,7 +109,7 @@ public class Game {
         }
         System.out.println();
         System.out.println("-----------------------------------------------");
-        print_score();
+        //print_score();
     }
     public boolean isCheck(String input, boolean check){
         if(isH(input)){player.put(deck);
@@ -119,12 +121,22 @@ public class Game {
 
         return check;
     }
-
     public void print_score(){
         System.out.println("점수확인용");
         System.out.println("player : " + player.sum);
         System.out.println("dealer : " + dealer.sum);
     }
+    public void showSecret(){
+        for(String card : dealer.cards.keySet()){
+            if(Objects.equals(card, "XX")){
+                dealer.cards.remove(card);
+                dealer.cards.put(dealer.secretCard.getKey(), dealer.secretCard.getValue());
+                dealer.sum = dealer.calculateSum();
+                break;
+            }
+        }
+    }
+
 
 
 }

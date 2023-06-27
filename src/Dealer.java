@@ -1,23 +1,37 @@
 
+import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Dealer {
+public class Dealer implements IPerson{
     int sum;
-    String secretCard;
     Map<String, Integer> cards;
+    Map.Entry<String, Integer> secretCard;
+
     public Dealer() {
         cards = new HashMap<>();
     } /////리스트에 저장말고 맵에 키 밸류로 저장하기
 
-
     // 가지고 있는 카드들의 전체 합을 계산하는 메소드
+    @Override
     public int calculateSum() {
         int cal_sum = 0;
         for (Integer value : cards.values()) {
             cal_sum += value;
         }
+        if(cal_sum > 21){
+            for (String value : cards.keySet()) {
+                if(cards.get(value) == 11){
+                    cards.put(value,1);
+                    cal_sum -= 10;
+                    break;
+
+                }
+            }
+        }
         return cal_sum;
+
+
     }
 
     // 카드의 값에 따라 숫자로 변환하여 반환하는 메소드
@@ -32,9 +46,17 @@ public class Dealer {
         }
     }
 
+    @Override
     public void put(Deck deck){
         String card = deck.pop();
         this.cards.put(card, getValue(card));
+    }
+
+    public void secretPut(Deck deck){
+        this.cards.put("XX",null);
+        String card = deck.pop();
+        Integer value = getValue(card);
+        secretCard= new AbstractMap.SimpleEntry<>(card, value);
     }
 
 
